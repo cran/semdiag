@@ -7,7 +7,7 @@ The \code{semdiag} function
 A function to calculate distance and parameter estimates for SEM diagnostics
 }
 \usage{
-semdiag(x,  EQSmodel, varphi=0.1, EQSdata='data.txt', D='E', delete=integer(0), max_it=1000, EQSprog='C:/Progra~1/EQS61/WINEQS',serial="111111 222222 333333", ram.path, software='EQS')}
+semdiag(x,  EQSmodel, varphi=0.1, EQSdata='data.txt', D='E', delete=integer(0), max_it=1000, EQSprog='C:/Progra~1/EQS61/WINEQS',serial=1234, ram.path, software='EQS')}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
@@ -37,7 +37,7 @@ The maximum number of iterations
 The path to where EQS program is installed.
 }
   \item{serial}{
-Serial no. for EQS. This is a string with spaces. Currently, it does not need to be supplied.
+Serial no. for EQS
 }
 }
 
@@ -62,7 +62,7 @@ Zhiyong Zhang and Ke-Hai Yuan
 Maintainer: Zhiyong Zhang <zhiyongzhang@nd.edu>
 }
 \references{
-Yuan, K.-H. and Zhang, Z. (2011). Structural Equation Modeling Diagnostics Using R Package semdiag and EQS. Structural Equation Modeling: An Interdisciplinary Journal.
+Yuan, K.-H. and Zhang, Z. (2011). Structural Equation Modeling Diagnostics Using R \code{semdiag} Package and EQS
 
 Yuan, K.-H., and Hayashi, K. (2010). Fitting data to model: Structural equation modeling diagnosis using two scatter plots. Psychological Methods, 15, 335--351.
 }

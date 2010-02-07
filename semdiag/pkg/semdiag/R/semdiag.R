@@ -2580,7 +2580,7 @@ semdiag.robfit1.r<-function(lisrel0, x, q, varphi, ram.path, max_it=1000){
 
 ## The main function for analysis
 
-semdiag<-function(x,  EQSmodel, varphi=0.1, EQSdata='data.txt', D='E', delete=integer(0), max_it=1000, EQSprog='C:/Progra~1/EQS61/WINEQS',serial="111111 222222 333333", ram.path, software='EQS'){
+semdiag<-function(x,  EQSmodel, varphi=0.1, EQSdata='data.txt', D='E', delete=integer(0), max_it=1000, EQSprog='C:/Progra~1/EQS61/WINEQS',serial=1234, ram.path, software='EQS'){
 
 	if (!is.matrix(x)) x<-data.matrix(x)
 	if (D=='E'){
@@ -3010,10 +3010,9 @@ semdiag.cpp<-function(d, cases){
 	xmean<-matrix(mu, n, p, byrow=TRUE)
 	xcenter<-x-xmean	
 	ylim<-round(max(abs(max(xcenter)), abs(min(xcenter))),1)
-	plot(1:p, rep(0,p), ylim=c(-ylim, ylim), type='n', axes=FALSE, xlab='Order of variables', ylab=expression(v[ij]-hat(mu)[j]))
+	plot(1:p, rep(0,p), ylim=c(-ylim, ylim), type='n', axes=FALSE, xlab='Order of variables', ylab=expression(x[ij]-hat(mu)[j]))
 	abline(h=0)
 	axis(2, at=c(-ylim, 0, ylim))
-	axis(1, at=1:p, labels=colnames(x))
 	for (i in cases){
 		lines(1:p, xcenter[i, ])
 		text(1:p, xcenter[i, ], i)
