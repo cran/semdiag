@@ -76,16 +76,18 @@ semdiag.read.eqs<-function (file)
     n.tot <- n.ind + n.dep
     if (n.ind%%32 == 0) {
         skiplines <- n.ind/32
-    }else {
+    }
+    else {
         skiplines <- trunc(n.ind/32) + 1
     }
     if (n.dep%%32 == 0) {
         skiplines <- skiplines + n.dep/32
-    }else {
+    }
+    else {
         skiplines <- skiplines + trunc(n.dep/32) + 1
     }
     parindvec <- scan(file.etp, skip = skiplines, quiet = TRUE)
-    varnames.string <- readLines(file.etp, n = skiplines, warn=FALSE)
+    varnames.string <- readLines(file.etp, n = skiplines, warn = FALSE)
     varnames.chvec <- unlist(strsplit(varnames.string, split = " "))
     varnames.vec <- varnames.chvec[which(varnames.chvec != "")]
     nout <- dim(cbk.info.mat)[1]
@@ -96,7 +98,8 @@ semdiag.read.eqs<-function (file)
             endlinevec <- cbk.info.mat[(i + 1):nout, 1]
             endline <- (endlinevec[endlinevec > 0])[1]
             nlines <- endline - startline
-        }else {
+        }
+        else {
             if ((cbk.info.mat[i, 2]) > 0) 
                 nlines <- endfile - startline
             else nlines <- 0
@@ -104,7 +107,8 @@ semdiag.read.eqs<-function (file)
         if (startline != 0) {
             vals <- scan(file.ets, skip = startline - 1, nlines = nlines, 
                 quiet = TRUE)
-        }else {
+        }
+        else {
             vals <- NA
         }
         model.list[[i]] <- vals
@@ -144,33 +148,33 @@ semdiag.read.eqs<-function (file)
         "Gradient")
     npar <- dim(parse.mat)[1]
     namesvec <- NULL
-    partable<-NULL
+    partable <- NULL
     for (i in 1:3) {
         if (i == 1) {
-            combmat <- semdiag.combinations(dim(parmat[[i]])[1], 2)
+            combmat <- semdiag.combinations(dim(parmat[[i]])[1], 
+                2)
             comb.names <- apply(combmat, 2, function(rn) rownames(parmat[[i]])[rn])
             par.val0 <- parmat[[i]][lower.tri(parmat[[i]], diag = TRUE)]
-            partable<-rbind(partable, cbind(comb.names, par.val0))
-            }
-        if (i==2) {
+            partable <- rbind(partable, cbind(comb.names, par.val0))
+        }
+        if (i == 2) {
+            comb.names <- as.matrix(expand.grid(colnames(parmat[[i]]),rownames(parmat[[i]]) 
+                ))
+            par.val0 <- as.vector(t(parmat[[i]]))
+            partable <- rbind(partable, cbind(comb.names, par.val0))
+        }
+        if (i == 3) {
             comb.names <- as.matrix(expand.grid(rownames(parmat[[i]]), 
                 colnames(parmat[[i]])))
-            par.val0 <- as.vector(parmat[[i]])
-            partable<-rbind(partable, cbind(comb.names, par.val0))
-        }
-        if (i ==3){
-        	comb.names <- as.matrix(expand.grid(rownames(parmat[[i]]), 
-                colnames(parmat[[i]])))
             par.val0 <- as.vector(t(parmat[[i]]))
-            partable<-rbind(partable, cbind(comb.names, par.val0))
+            partable <- rbind(partable, cbind(comb.names, par.val0))
         }
         par.val.ind <- which(((par.val0 != 0) + (par.val0 != 
             -1)) == 2)
         names.mat <- rbind(comb.names[par.val.ind, ])
-        if (i==3) {names <- apply(names.mat, 1, function(ss) paste("(", ss[2], ",", ss[1], ")", sep = ""))
-            }else{
-            names <- apply(names.mat, 1, function(ss) paste("(", ss[1], ",", ss[2], ")", sep = ""))
-            }
+        
+        names <- apply(names.mat, 1, function(ss) paste("(", 
+                ss[2], ",", ss[1], ")", sep = ""))       
         namesvec <- c(namesvec, names)
     }
     if ((dim(parse.mat)[1]) != (length(namesvec))) {
@@ -243,6 +247,7 @@ semdiag.read.eqs<-function (file)
         list(indstd = model.list[[22]]))
     result
 }
+
 
 semdiag.run.eqs<-function (EQSpgm, EQSmodel, serial, Rmatrix = NA, datname = NA, 
     LEN = 2e+06) 
